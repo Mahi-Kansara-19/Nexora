@@ -52,27 +52,26 @@ export const updateUser = async (req, res) => {
     const { _id, password } = req.body;
 
     if (id === _id) {
-
-        if (password) {
-            const salt = await bcrypt.genSalt(10);
-            let pass = password.toString();
-            req.body.password = await bcrypt.hash(pass, salt)
-        }
-
         try {
+            if (password) {
+                const salt = await bcrypt.genSalt(10);
+                let pass = password.toString();
+                req.body.password = await bcrypt.hash(pass, salt);
+            }
+
             const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
 
             const token = jwt.sign(
                 { email: user.email, id: user._id },
-                process.env.JWT_KEY
+                process.env.JWT_KEY || "MERN_SECRET_KEY_2026"
             );
 
-            res.status(200).json({ user, token })
+            res.status(200).json({ user, token });
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     } else {
-        res.status(403).json("Access Denied! You can only update your own profile")
+        res.status(403).json("Access Denied! You can only update your own profile");
     }
 }
 
@@ -88,12 +87,12 @@ export const deleteUser = async (req, res) => {
     if (_id === id || currentUserAdminStatus) {
         try {
             await UserModel.findByIdAndDelete(id);
-            res.status(200).json("User deleted successfully")
+            res.status(200).json("User deleted successfully");
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     } else {
-        res.status(403).json("Access Denied! You can only update your own profile")
+        res.status(403).json("Access Denied! You can only update your own profile");
     }
 }
 
@@ -107,24 +106,27 @@ export const followUser = async (req, res) => {
     const { _id } = req.body;
 
     if (_id === id) {
-        res.status(403).json("Action forbidden")
+        res.status(403).json("Action forbidden");
     } else {
         try {
-
             const followUser = await UserModel.findById(id);
             const followingUser = await UserModel.findById(_id);
 
-            if (!followUser.followers.includes(_id)) {
-                await followUser.updateOne({ $push: { followers: _id } })
-                await followingUser.updateOne({ $push: { following: id } })
+            if (!followUser || !followingUser) {
+                return res.status(404).json("User not found");
+            }
 
-                res.status(200).json("User Followed!")
+            if (!followUser.followers.includes(_id)) {
+                await followUser.updateOne({ $push: { followers: _id } });
+                await followingUser.updateOne({ $push: { following: id } });
+
+                res.status(200).json("User Followed!");
             } else {
-                res.status(403).json("User is Already followed by you")
+                res.status(403).json("User is Already followed by you");
             }
 
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     }
 }
@@ -139,24 +141,27 @@ export const UnFollowUser = async (req, res) => {
     const { _id } = req.body;
 
     if (_id === id) {
-        res.status(403).json("Action forbidden")
+        res.status(403).json("Action forbidden");
     } else {
         try {
-
             const followUser = await UserModel.findById(id);
             const followingUser = await UserModel.findById(_id);
 
-            if (followUser.followers.includes(_id)) {
-                await followUser.updateOne({ $pull: { followers: _id } })
-                await followingUser.updateOne({ $pull: { following: id } })
+            if (!followUser || !followingUser) {
+                return res.status(404).json("User not found");
+            }
 
-                res.status(200).json("User Unfollowed!")
+            if (followUser.followers.includes(_id)) {
+                await followUser.updateOne({ $pull: { followers: _id } });
+                await followingUser.updateOne({ $pull: { following: id } });
+
+                res.status(200).json("User Unfollowed!");
             } else {
-                res.status(403).json("User is not followed by you")
+                res.status(403).json("User is not followed by you");
             }
 
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json(error);
         }
     }
 }

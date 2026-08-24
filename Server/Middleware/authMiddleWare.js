@@ -3,23 +3,28 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const secret = process.env.JWT_KEY;
-
 const authMiddleWare = async (req, res, next) => {
     try {
+        const secret = process.env.JWT_KEY || "MERN_SECRET_KEY_2026";
+        const authHeader = req.headers.authorization;
 
-        const token = req.headers.authorization.split(" ")[1];
-        console.log(token);
-        if (token) {
-            const decoded = jwt.verify(token, secret);
-            console.log(decoded);
-
-            req.body._id = decoded?.id;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ message: "Access Denied: No token provided" });
         }
 
-        next();
+        const token = authHeader.split(" ")[1];
+
+        if (token) {
+            const decoded = jwt.verify(token, secret);
+            if (!req.body) req.body = {};
+            req.body._id = decoded?.id;
+            next();
+        } else {
+            return res.status(401).json({ message: "Access Denied: Invalid token" });
+        }
     } catch (error) {
-        console.log(error);
+        console.log("Auth Middleware Error:", error.message);
+        return res.status(401).json({ message: "Authentication failed: " + error.message });
     }
 }
 

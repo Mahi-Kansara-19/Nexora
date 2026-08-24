@@ -121,15 +121,19 @@ export const timeline = async (req, res) => {
                     }
                 }
             ]
-        )
-
-        res.status(200).json(currenUserPosts.concat(...followingUserPosts[0].followingUserPosts).sort((a, b) => {
-            return b.createdAt - a.createdAt;
-        })
         );
 
+        const followingPostsList = (followingUserPosts && followingUserPosts[0] && followingUserPosts[0].followingUserPosts)
+            ? followingUserPosts[0].followingUserPosts
+            : [];
+
+        const allPosts = currenUserPosts.concat(followingPostsList).sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+
+        res.status(200).json(allPosts);
 
     } catch (error) {
-        res.status(500).json(error)
+        res.status(500).json(error);
     }
 }

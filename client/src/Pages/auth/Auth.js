@@ -9,7 +9,7 @@ const Auth = () => {
 
     const [isSignUp, setIsSignUp] = useState(true);
     const dispatch = useDispatch();
-    const loading = useSelector((state) => state.authReducer.loading);
+    const { loading, error } = useSelector((state) => state.authReducer);
 
     const [data, setData] = useState({ firstname: "", lastname: "", email: "", password: "", confirmpass: "" });
 
@@ -108,6 +108,12 @@ const Auth = () => {
                     <span style={{ display: confirmPass ? "none" : "block", color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px" }}>
                         * Confirm Password is not same
                     </span>
+
+                    {error && (
+                        <span style={{ color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px" }}>
+                            * Something went wrong. Please check your credentials or try again.
+                        </span>
+                    )}
 
 
                     <div>

@@ -8,9 +8,9 @@ const UserFollow = ({ person }) => {
 
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.authReducer.authData);
-    const [following, setFollowing] = useState(person.followers.includes(user._id));
+    const [following, setFollowing] = useState((person.followers || []).includes(user._id));
 
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER || "http://localhost:5000/images/";
 
 
     const handleFollow = () => {

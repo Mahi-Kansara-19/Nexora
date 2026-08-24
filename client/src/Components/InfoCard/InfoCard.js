@@ -27,8 +27,8 @@ const InfoCard = () => {
         setProfileUser(user);
 
       } else {
-        const profileUser = await UserApi.getUser(profileUserId)
-        setProfileUser(profileUser);
+        const { data } = await UserApi.getUser(profileUserId);
+        setProfileUser(data);
       }
 
     }

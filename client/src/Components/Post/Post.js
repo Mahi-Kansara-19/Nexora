@@ -11,9 +11,10 @@ import { likePost } from '../../api/PostRequest';
 
 const Post = ({ data }) => {
 
-  const { user } = useSelector((state) => state.authReducer.authData)
-  const [liked, setLiked] = useState(data.likes.includes(user._id))
-  const [likes, setLikes] = useState(data.likes.length)
+  const { user } = useSelector((state) => state.authReducer.authData);
+  const publicFolder = process.env.REACT_APP_PUBLIC_FOLDER || "http://localhost:5000/images/";
+  const [liked, setLiked] = useState((data.likes || []).includes(user._id));
+  const [likes, setLikes] = useState((data.likes || []).length);
 
 
   const handleLike = () => {
@@ -25,7 +26,7 @@ const Post = ({ data }) => {
   return (
     <div className='Post'>
 
-      <img src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : " "} alt="" />
+      {data.image && <img src={publicFolder + data.image} alt="" />}
 
       <div className="postReact">
         <img src={liked ? Like : Notlike} alt="" style={{ cursor: "pointer" }} onClick={handleLike} />

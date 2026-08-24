@@ -74,7 +74,7 @@ function ProfileModal({ modalOpened, setModalOpened, data }) {
     }
 
 
-    dispatch(updateUser(param.id, UserData));
+    dispatch(updateUser(param.id || user._id, UserData));
     setModalOpened(false);
   }
 
