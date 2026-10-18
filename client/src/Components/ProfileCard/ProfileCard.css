@@ -1,94 +1,113 @@
 .ProfileCard {
-    border-radius: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    gap: 1rem;
-    background: var(--cardColor);
-    overflow-x: clip;   
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
 }
 
 .ProfileImages {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.ProfileImages>img:nth-of-type(1) {
-    width: 100%;
+.ProfileImages > img:nth-of-type(1) {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
 }
 
-.ProfileImages>img:nth-of-type(2) {
-    width: 6rem;
-    border-radius: 50%;
-    position: absolute;
-    bottom: -3rem;
-    box-shadow: var(--profileShadow);
+.ProfileImages > img:nth-of-type(2) {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: -35px;
+  border: 3px solid var(--bg-primary);
+  object-fit: cover;
+  background-color: #efefef;
 }
 
 .ProfileName {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 38px;
+  gap: 4px;
 }
 
-.ProfileName>span:nth-of-type(1) {
-    font-weight: bold;
+.ProfileName > span:nth-of-type(1) {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
 }
 
+.ProfileName > span:nth-of-type(2) {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
 
 .followStatus {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .followStatus > hr {
-    width: 85%;
-    border: 1px solid gray;
+  width: 90%;
+  border: none;
+  border-top: 1px solid var(--border-light);
 }
 
 .followStatus > div {
-    display: flex;
-    gap: 1rem;
-    width: 80%;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  width: 85%;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .follow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
 }
 
 .follow > :nth-of-type(1) {
-    font-weight: bold;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
 }
 
 .follow > :nth-of-type(2) {
-    color: black;
-    font-size: 15px;
+  color: var(--text-secondary);
+  font-size: 12px;
 }
 
-.vl { 
-    border: 1px solid gray;  
-    height: 50px;
+.vl {
+  border-left: 1px solid var(--border-light);
+  height: 36px;
 }
-
 
 .ProfileCard > span {
-    font-weight: bold;
-    color: var(--purplePain);
-    align-self: center;
-    margin-bottom: 1rem;
-    cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--ig-blue);
+  align-self: center;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.ProfileCard > span:hover {
+  color: var(--ig-blue-hover);
 }

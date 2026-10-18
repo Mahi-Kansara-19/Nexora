@@ -1,0 +1,176 @@
+.pm-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 20px;
+  animation: fadeIn 0.15s ease;
+}
+
+.pm-card {
+  width: 100%;
+  max-width: 540px;
+  background-color: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pm-header {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pm-close {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pm-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pm-save-btn {
+  color: var(--ig-blue);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.pm-save-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pm-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.pm-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  background-color: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.pm-avatar-wrap {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.pm-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.pm-avatar-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 24px;
+  height: 24px;
+  background-color: var(--ig-blue);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid var(--bg-primary);
+}
+
+.pm-avatar-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pm-username-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pm-change-photo-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ig-blue);
+  cursor: pointer;
+}
+
+.pm-change-photo-link:hover {
+  color: var(--ig-blue-hover);
+}
+
+.pm-fields-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pm-field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pm-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pm-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.pm-input:focus {
+  border-color: var(--text-primary);
+  background-color: var(--bg-primary);
+}
+
+.pm-cover-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-light);
+}
+
+.pm-file-input {
+  font-size: 13px;
+  color: var(--text-secondary);
+}

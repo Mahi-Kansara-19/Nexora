@@ -1,29 +1,30 @@
-import { Modal, useMantineTheme } from '@mantine/core';
+import React from 'react';
+import './ShareModal.css';
 import PostShare from '../PostShare/PostShare';
+import CloseIcon from '@mui/icons-material/Close';
 
 function ShareModal({ modalOpened, setModalOpened }) {
-    const theme = useMantineTheme();
+  if (!modalOpened) return null;
 
-    return (
-        <>
-            <Modal
-                opened={modalOpened}
-                onClose={() => setModalOpened(false)}
-                size="55%"
-                overlayProps={{
-                    color: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2],
-                    opacity: 0.55,
-                    blur: 3,
-                }}
-            >
-
-                <PostShare />
-
-            </Modal>
-
-        </>
-    );
+  return (
+    <div className="share-modal-backdrop" onClick={() => setModalOpened(false)}>
+      <div className="share-modal-card" onClick={(e) => e.stopPropagation()}>
+        <div className="share-modal-header">
+          <span className="sm-title">Create Post</span>
+          <button
+            type="button"
+            className="sm-close-btn"
+            onClick={() => setModalOpened(false)}
+          >
+            <CloseIcon />
+          </button>
+        </div>
+        <div className="share-modal-body">
+          <PostShare />
+        </div>
+      </div>
+    </div>
+  );
 }
 
-
-export default ShareModal
+export default ShareModal;

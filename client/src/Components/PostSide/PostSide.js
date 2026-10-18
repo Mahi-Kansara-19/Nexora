@@ -1,15 +1,15 @@
-import React from 'react'
-import './PostSide.css'
-import PostShare from '../PostShare/PostShare'
-import Posts from '../Posts/Posts'
+import React from 'react';
+import './PostSide.css';
+import Stories from '../Stories/Stories';
+import Posts from '../Posts/Posts';
 
-const PostSide = () => {
+const PostSide = ({ onOpenCreate }) => {
   return (
     <div className="PostSide">
-        <PostShare />
-        <Posts />
+      <Stories onOpenCreate={onOpenCreate} />
+      <Posts onOpenCreate={onOpenCreate} />
     </div>
-  )
-}
+  );
+};
 
-export default PostSide
+export default PostSide;
